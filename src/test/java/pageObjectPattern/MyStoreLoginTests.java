@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pageObjectPattern.pages.LoginPage;
+import pageObjectPattern.pages.myStore.LoginPage;
 
 public class MyStoreLoginTests {
 

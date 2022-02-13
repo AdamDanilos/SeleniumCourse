@@ -7,10 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pageObjectPattern.pages.AuthenticationPage;
-import pageObjectPattern.pages.CreateAnAccountPage;
-import pageObjectPattern.pages.HotelBrowser;
-import pageObjectPattern.pages.HotelsListingPage;
+import pageObjectPattern.pages.hotelTestlab.AuthenticationPage;
+import pageObjectPattern.pages.hotelTestlab.CreateAnAccountPage;
+import pageObjectPattern.pages.hotelTestlab.HotelBrowser;
+import pageObjectPattern.pages.hotelTestlab.HotelsListingPage;
 
 public class HotelTestlabTests {
 
