@@ -16,20 +16,20 @@ public class BingSearchStepDefinitions {
 
     @Given("an open browser with bing.com")
     public void anOpenBrowserWithBingCom() {
-        driver = WebDriverFactory.createChromeDriverWithImplicitlyWait(5);
+        //driver = WebDriverFactory.createChromeDriverWithImplicitlyWait(5);
         driver.get("https://www.bing.com/");
     }
 
-    @When("a keyword selenium is entered in input field and clicks search button")
-    public void aKeywordSeleniumIsEnteredInInputFieldAndClicksSearchButton() {
+    @When("a keyword {string} is entered in input field and clicks search button")
+    public void aKeywordIsEnteredInInputFieldAndClicksSearchButton(String keyword) {
         WebElement searchInput = driver.findElement(By.name("q"));
-        searchInput.sendKeys("selenium");
+        searchInput.sendKeys(keyword);
         searchInput.submit();
     }
 
-    @Then("the first result should contain selenium")
-    public void theFirstResultShouldContainSelenium() {
-        System.out.println("wyszukało selenium");
+    @Then("the first result should contain {string}")
+    public void theFirstResultShouldContainSelenium(String keyword) {
+        System.out.println("wyszukało " + keyword);
 
         //tutaj jest dobre miejsce na asercje
         Assertions.assertTrue(true);

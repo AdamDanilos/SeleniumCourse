@@ -1,8 +1,7 @@
 package bdd;
 
+import helpers.GeneralHelpers;
 import helpers.WebDriverFactory;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,18 +17,9 @@ public class HotelTestlabRegistrationSteps {
 
     CreateAnAccountPage createAnAccountPage;
 
-    @Before
-    public void openBrowser() {
-        driver = WebDriverFactory.createChromeDriverWithImplicitlyWait(10);
-    }
-
-    @After
-    public void closeBrowser() {
-        driver.quit();
-    }
-
     @Given("unregistered user is on the Hotel Testlab website")
     public void unregisteredUserIsOnTheHotelTestlabWebsite() {
+        driver = WebDriverFactory.createChromeDriverWithImplicitlyWait(10);
         driver.get("https://hotel-testlab.coderslab.pl/en/");
     }
 
@@ -38,9 +28,10 @@ public class HotelTestlabRegistrationSteps {
         driver.findElement(By.xpath("//*[@id=\"header\"]/div[3]/div/div/div[7]/ul/li/a/span")).click();
     }
 
-    @When("user inputs email address in Create An Account section")
+    @When("user inputs random email address in Create An Account section")
     public void userInputsEmailAddressInCreateAnAccountSection() {
-        driver.findElement(By.id("email_create")).sendKeys("jds12522das45@mail.com");
+        String email = GeneralHelpers.GetCurrentRandomizedDateTimeEmail();
+        driver.findElement(By.id("email_create")).sendKeys(email);
     }
 
     @And("clicks Create an account button")
@@ -48,15 +39,17 @@ public class HotelTestlabRegistrationSteps {
         driver.findElement(By.id("SubmitCreate")).click();
     }
 
-    @When("user fills First name, Last name, Password and user clicks Register button")
-    public void userFillsFirstNameLastNamePasswordAndUserClicksRegisterButton() {
+    @When("user fills {string}, {string}, {string} and user clicks Register button")
+    public void userFillsFirstNameLastNamePasswordAndUserClicksRegisterButton(String firstName, String lastName, String password) {
         createAnAccountPage = new CreateAnAccountPage(driver);
-        createAnAccountPage.registerUser("firstName", "lastName", "password");
+        createAnAccountPage.registerUser(firstName, lastName, password);
     }
 
     @Then("Your account has been created. message is displayed.")
     public void yourAccountHasBeenCreatedMessageIsDisplayed() {
         Assertions.assertEquals("Your account has been created.",
                 createAnAccountPage.getRegistrationConfirmationText());
+
+        driver.quit();
     }
 }
